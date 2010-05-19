@@ -17,6 +17,13 @@ module Game
       Music.autoload_dirs   << File.join(dir, "resources", "music")
       Font.autoload_dirs    << File.join(dir, "resources", "fonts")
     end
+    
+    def run( &block )
+      runner = self::Runner.new
+      yield runner
+      runner.go
+    end
+    
   end
   
 end
