@@ -1,6 +1,8 @@
 require "rubygems"
 require "rubygame"
 
+Rubygame.enable_key_repeat 0.5, 0.5
+
 require "lib/game"
 require "lib/font"
 
@@ -13,6 +15,7 @@ include Rubygame::EventTriggers
 include EventHandler::HasEventHandler
     
 Game.autoload_resources!
+
 
 require "lib/ship"
 require "lib/game/runner"

@@ -1,44 +1,28 @@
-module Game
-  class Sound
-    include Rubygame::NamedResource
+module A
   
-    Sound.autoload_dirs = [ 
-      File.join(File.dirname(__FILE__), "resources", "sound", "wav"), 
-      File.join(File.dirname(__FILE__), "resources", "sound") 
-    ]
-    
-    @@resources = {}
+  attr_accessor :a
+  
+  # Initialize the Sprite, defining @groups and @depth.
+  def initialize(*params)    
+		@a = 0
+    puts params
+	end
+  
+  def test
+    if a == @a 
+      puts "#{a} == #{@a}"
+    else
+      puts "Oops!"
+    end
+  end
+  
+end
 
-    def self.[]=(name,value)
-      @@resources[name] = value
-    end
-
-    def self.[](name)       
-      result = @@resources[name]
-    
-      if result.nil?
-        result = autoload(name)
-        if result
-          self[name] = result
-          result.name = name
-        end
-      end
-    
-      return result        
-    end
+class B
+  include A
   
-    def self.autoload( name )    
-      # Searches autoload_dirs for the file    
-      path = find_file( name )    
-      if( path )
-        return load_sound( path )
-      else
-        return nil      
-      end
-    end
-  
-    def self.load_sound( path )
-      return Rubygame::Sound.load(path)
-    end
+  def initialize(screen, *params)    
+    super
+    puts screen
   end
 end
