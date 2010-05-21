@@ -17,6 +17,6 @@ include EventHandler::HasEventHandler
 Game.autoload_resources!
 
 
-require "lib/ship"
+require "lib/tank"
 require "lib/game/runner"
 
