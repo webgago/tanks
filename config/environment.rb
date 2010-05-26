@@ -14,9 +14,6 @@ include Rubygame::EventActions
 include Rubygame::EventTriggers
 include EventHandler::HasEventHandler
     
-Game.autoload_resources!
-
-
 require "lib/tank"
 require "lib/game/runner"
 

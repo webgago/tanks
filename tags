@@ -1,4 +1,4 @@
-1274484402
+1274817864
 A	/home/seller/src/tanks/sounds.rb	module A
 B	/home/seller/src/tanks/sounds.rb	class B
 Bomb	/home/seller/src/tanks/lib/acts/bomb_shooting.rb	  class Bomb
@@ -8,6 +8,7 @@ ClockTicked	/home/seller/src/tanks/lib/acts/line_moving.rb	      ClockTicked =
 ClockTicked	/home/seller/src/tanks/lib/acts/space_moving.rb	      ClockTicked =
 Font	/home/seller/src/tanks/lib/font.rb	class Font 
 GUN_HEIGHT	/home/seller/src/tanks/lib/tank.rb	    GUN_HEIGHT =
+GUN_WIDTH	/home/seller/src/tanks/lib/tank.rb	    GUN_WIDTH =
 Game	/home/seller/src/tanks/game.rb	class Game
 Game	/home/seller/src/tanks/lib/game.rb	module Game 
 Game	/home/seller/src/tanks/lib/game/runner.rb	module Game
@@ -16,6 +17,7 @@ KeyPressed	/home/seller/src/tanks/game.rb	                      KeyPressed =
 KeyPressed	/home/seller/src/tanks/lib/acts/bomb_shooting.rb	      KeyPressed =
 KeyPressed	/home/seller/src/tanks/lib/acts/line_moving.rb	      KeyPressed =
 KeyPressed	/home/seller/src/tanks/lib/acts/space_moving.rb	      KeyPressed =
+KeyPressed	/home/seller/src/tanks/lib/tank.rb	        KeyPressed =
 KeyReleased	/home/seller/src/tanks/lib/acts/line_moving.rb	      KeyReleased =
 KeyReleased	/home/seller/src/tanks/lib/acts/space_moving.rb	      KeyReleased =
 LineMoving	/home/seller/src/tanks/lib/acts/line_moving.rb	module LineMoving
@@ -30,8 +32,11 @@ a	/home/seller/src/tanks/sounds.rb	  attr_accessor :a
 autoload	/home/seller/src/tanks/lib/font.rb	    def autoload
 autoload_resources	/home/seller/src/tanks/lib/game.rb	    def autoload_resources
 bind	/home/seller/src/tanks/lib/acts/line_moving.rb	  def bind
-bomb_key_pressed_event_handler	/home/seller/src/tanks/lib/acts/bomb_shooting.rb	  def bomb_key_pressed_event_handler
-create_bomb	/home/seller/src/tanks/lib/acts/bomb_shooting.rb	  def create_bomb
+body_color	/home/seller/src/tanks/lib/tank.rb	    attr_accessor :gun_color, :tower_color, :body_color
+body_color	/home/seller/src/tanks/lib/tank.rb	    def body_color
+bot	/home/seller/src/tanks/lib/tank.rb	    def bot
+bot_update	/home/seller/src/tanks/lib/tank.rb	    def bot_update
+clock	/home/seller/src/tanks/lib/game/runner.rb	    attr_accessor :clock
 delete	/home/seller/src/tanks/lib/acts/bomb_shooting.rb	    def delete
 dir	/home/seller/src/tanks/lib/game.rb	    def dir
 do_exit	/home/seller/src/tanks/game.rb	  def do_exit
@@ -39,10 +44,16 @@ draw	/home/seller/src/tanks/game.rb	  def draw
 draw	/home/seller/src/tanks/hud.rb	  def draw
 draw	/home/seller/src/tanks/lib/acts/bomb_shooting.rb	    def draw
 draw	/home/seller/src/tanks/lib/tank.rb	    def draw
+draw_body	/home/seller/src/tanks/lib/tank.rb	    def draw_body
+draw_gun	/home/seller/src/tanks/lib/tank.rb	    def draw_gun
 draw_text	/home/seller/src/tanks/game.rb	  def draw_text
+draw_tower	/home/seller/src/tanks/lib/tank.rb	    def draw_tower
 end_moving	/home/seller/src/tanks/lib/acts/line_moving.rb	  def end_moving
 faster_mod	/home/seller/src/tanks/lib/acts/bomb_shooting.rb	  def faster_mod
 go	/home/seller/src/tanks/lib/game/runner.rb	    def go
+gun_color	/home/seller/src/tanks/lib/tank.rb	    attr_accessor :gun_color, :tower_color, :body_color
+gun_color	/home/seller/src/tanks/lib/tank.rb	    def gun_color
+hooks	/home/seller/src/tanks/lib/tank.rb	    def hooks
 initialize	/home/seller/src/tanks/game.rb	  def initialize
 initialize	/home/seller/src/tanks/hud.rb	  def initialize
 initialize	/home/seller/src/tanks/lib/acts/bomb_shooting.rb	    def initialize
@@ -53,6 +64,7 @@ initialize	/home/seller/src/tanks/sounds.rb	  def initialize
 initialize_moving	/home/seller/src/tanks/lib/acts/line_moving.rb	  def initialize_moving
 initialize_moving	/home/seller/src/tanks/lib/acts/space_moving.rb	  def initialize_moving
 initialize_shooting	/home/seller/src/tanks/lib/acts/bomb_shooting.rb	  def initialize_shooting
+key	/home/seller/src/tanks/lib/acts/line_moving.rb	  attr_accessor :key
 key_pressed	/home/seller/src/tanks/game.rb	  def key_pressed
 key_pressed	/home/seller/src/tanks/lib/acts/space_moving.rb	  def key_pressed
 key_released	/home/seller/src/tanks/lib/acts/space_moving.rb	  def key_released
@@ -63,26 +75,33 @@ make_queue	/home/seller/src/tanks/game.rb	  def make_queue
 make_queue	/home/seller/src/tanks/lib/game/runner.rb	    def make_queue
 make_screen	/home/seller/src/tanks/game.rb	  def make_screen
 make_screen	/home/seller/src/tanks/lib/game/runner.rb	    def make_screen
-make_ship	/home/seller/src/tanks/lib/game/runner.rb	    def make_ship
 move	/home/seller/src/tanks/lib/acts/bomb_shooting.rb	    def move
 move_down	/home/seller/src/tanks/lib/acts/bomb_shooting.rb	    def move_down
 move_left	/home/seller/src/tanks/lib/acts/bomb_shooting.rb	    def move_left
 move_right	/home/seller/src/tanks/lib/acts/bomb_shooting.rb	    def move_right
 move_up	/home/seller/src/tanks/lib/acts/bomb_shooting.rb	    def move_up
+moving_hooks	/home/seller/src/tanks/lib/acts/line_moving.rb	  def moving_hooks
 moving_key	/home/seller/src/tanks/lib/acts/line_moving.rb	  def moving_key
 moving_keys	/home/seller/src/tanks/lib/acts/line_moving.rb	  def moving_keys
 objects	/home/seller/src/tanks/lib/game/runner.rb	    attr_accessor :objects
 play_sound	/home/seller/src/tanks/lib/acts/bomb_shooting.rb	  def play_sound
 quit	/home/seller/src/tanks/lib/game/runner.rb	    def quit
+rect	/home/seller/src/tanks/lib/acts/bomb_shooting.rb	    attr_accessor :surface, :rect
 run	/home/seller/src/tanks/game.rb	  def run
 run	/home/seller/src/tanks/lib/game.rb	    def run
 screen	/home/seller/src/tanks/lib/game/runner.rb	    attr_accessor :screen
 screen	/home/seller/src/tanks/lib/tank.rb	    attr_accessor :vector, :screen, :x, :y
 set_vector	/home/seller/src/tanks/lib/tank.rb	    def set_vector
+shoot	/home/seller/src/tanks/lib/acts/bomb_shooting.rb	  def shoot
+shoot_handler	/home/seller/src/tanks/lib/acts/bomb_shooting.rb	  def shoot_handler
+shooting_hooks	/home/seller/src/tanks/lib/acts/bomb_shooting.rb	  def shooting_hooks
+shooting_set_position	/home/seller/src/tanks/lib/acts/bomb_shooting.rb	  def shooting_set_position
 start_moving	/home/seller/src/tanks/lib/acts/line_moving.rb	  def start_moving
 step	/home/seller/src/tanks/lib/game/runner.rb	    def step
-surface	/home/seller/src/tanks/lib/acts/bomb_shooting.rb	    attr_accessor :surface
+surface	/home/seller/src/tanks/lib/acts/bomb_shooting.rb	    attr_accessor :surface, :rect
 test	/home/seller/src/tanks/sounds.rb	  def test
+tower_color	/home/seller/src/tanks/lib/tank.rb	    attr_accessor :gun_color, :tower_color, :body_color
+tower_color	/home/seller/src/tanks/lib/tank.rb	    def tower_color
 update	/home/seller/src/tanks/game.rb	  def update
 update	/home/seller/src/tanks/hud.rb	  def update
 update	/home/seller/src/tanks/lib/acts/space_moving.rb	  def update

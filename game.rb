@@ -1,7 +1,3 @@
-#!/usr/bin/ruby1.8
-
-# This is just a blank window that I use as the starting point for all my games
-
 require 'rubygems'
 require 'rubygame'
 require "hud"
@@ -17,7 +13,7 @@ class Game
   include EventHandler::HasEventHandler
   
   def initialize
-    @screen = Rubygame::Screen.new [1280,800], 0, [Rubygame::ASYNCBLIT, Rubygame::HWSURFACE, Rubygame::DOUBLEBUF]
+    @screen = Rubygame::Screen.new [1280,800], 0, [Rubygame::FULLSCREEN, Rubygame::ASYNCBLIT, Rubygame::HWSURFACE, Rubygame::DOUBLEBUF]
     @screen.title = "Generic Game!"
 
     @text = ''
