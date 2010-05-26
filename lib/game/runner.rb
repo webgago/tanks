@@ -24,9 +24,7 @@ module Game
     def go
       catch(:quit) do
         loop do
-          $time = Time.now
           step
-          $dectime = $time
         end
       end
     end
@@ -68,7 +66,7 @@ module Game
     # Create the Rubygame window.
     def make_screen
       #Rubygame::FULLSCREEN
-      @screen = Screen.open( [600, 400], 0, [Rubygame::ASYNCBLIT, Rubygame::HWSURFACE, Rubygame::DOUBLEBUF] )
+      @screen = Screen.open( [600, 600], 0, [Rubygame::ASYNCBLIT, Rubygame::HWSURFACE, Rubygame::DOUBLEBUF] )
       @screen.title = "The Tanks!"
     end
 
@@ -97,10 +95,13 @@ module Game
       # Draw the ship in its new position.
       @objects.each do |object|
         object.draw( @screen )
+        object.update
+        @objects.delete(object) if object.delete? rescue ''
       end 
 
       # Refresh the screen.
       @screen.update()
+      @screen.flip()
     end
   end
 end

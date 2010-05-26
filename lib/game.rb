@@ -2,7 +2,8 @@
 module Game 
   
   class << self
-    
+
+
     # Get the absolute path to the directory that this script is in.
     def dir
       File.expand_path( File.join( File.dirname( File.expand_path(__FILE__) ), '..' ) )
@@ -19,9 +20,13 @@ module Game
     end
     
     def run( &block )
-      runner = self::Runner.new
-      yield runner
-      runner.go
+      @@runner = self::Runner.new
+      yield @@runner
+      @@runner.go
+    end
+
+    def runner
+      @@runner
     end
     
   end

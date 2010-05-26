@@ -15,5 +15,6 @@ include Rubygame::EventTriggers
 include EventHandler::HasEventHandler
     
 require "lib/tank"
+require "lib/wall"
 require "lib/game/runner"
 

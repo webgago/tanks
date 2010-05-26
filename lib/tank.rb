@@ -16,7 +16,7 @@ class Tank
   attr_accessor :vector, :screen, :x, :y
   attr_accessor :gun_color, :tower_color, :body_color
   
-  GUN_HEIGHT = 30
+  GUN_HEIGHT = 15
   GUN_WIDTH = 6
     
   def initialize( screen, px, py, w, h )
@@ -30,14 +30,15 @@ class Tank
     @body = Surface.new([w,h])
     @body.fill(body_color || :white)
     @rect = @image.make_rect
-    @rect.center = [@px, @py]
+    @rect.top = @px
+    @rect.left = @py
 
     set_vector(:up)
             
     @gun = Surface.new([GUN_WIDTH, GUN_HEIGHT])
     @gun.fill(gun_color || :gray)
       
-    @tower = Surface.new([40,40])
+    @tower = Surface.new([20,20])
     @tower.fill(tower_color || :green)
 
 
@@ -89,17 +90,16 @@ class Tank
     
   def set_vector( key )
     @vector = key if [:left, :right, :up, :down].include? key
-
-    EventHook.new( :owner   => self,
-      :trigger => VectorChanged.new(),
-      :action  => MethodAction.new( :updated_vector ) )
-
   end
 
   def updated_vector
     puts @vector
   end
-    
+
+  def update
+
+  end
+  
   def draw(screen)
     super
       
@@ -149,45 +149,6 @@ class Tank
     set_vector( event.key )
   end
 
-  private
-
-  def _make_magic_action( action )
-
-    BlockAction.new { |owner, event|
-      puts "#{owner.inspect}"
-    }
-
-    case action
-
-    when :move_left
-
-      return BlockAction.new { |owner, event|
-        puts "#{owner} #{self}"
-      }
-
-    when :move_right
-
-      return BlockAction.new { |owner, event|
-        puts "#{owner} #{self}"
-      }
-
-    when :move_up
-      return BlockAction.new { |owner, event|
-        puts "#{owner} #{self}"
-      }
-
-    when :move_down
-      return BlockAction.new { |owner, event|
-        puts "#{owner} #{self}"
-      }
-
-    else
-      super
-    end
-  end
-
 end
-
-class VectorChanged; end
 
 

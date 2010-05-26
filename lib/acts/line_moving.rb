@@ -31,7 +31,7 @@ module LineMoving
   end
     
   def moving_hooks!
-     # Create event hooks in the easiest way.
+    # Create event hooks in the easiest way.
     make_magic_hooks(
       KeyPressed => :start_moving,
       KeyReleased => :end_moving,    
@@ -137,12 +137,19 @@ module LineMoving
   def update_pos( dt )
     px = @px + (@vx * dt)
     py = @py + (@vy * dt)
-    
+
+    obstructions = Game.runner.objects.select do |obj|
+      obj.is_a?(Obstruction) and obj.collide_sprite?(self)
+    end
+
+    return unless obstructions.empty?
+
     if py - (@rect.h/2) > 0 and 
-      py < @screen.h - (@rect.h/2) and 
-      px - (@rect.w/2) > 0 and 
-      px < @screen.w - (@rect.w/2)
-    then  
+        py < @screen.h - (@rect.h/2) and
+        px - (@rect.w/2) > 0 and
+        px < @screen.w - (@rect.w/2)
+      then
+      
       @px += @vx * dt
       @py += @vy * dt
       

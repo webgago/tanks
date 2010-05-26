@@ -84,23 +84,38 @@ module BombShooting
     def initialize(parent, center, vector)      
       @parent = parent
       
-      @surface = Surface.new([5,5])
-      @surface.fill(:red)
-      @rect = @surface.make_rect
-      
+      @image = Surface.new([5,5])
+      @image.fill(:red)
+      @rect = @image.make_rect
+      @rect.center = center
       @x, @y = center
       @vector = vector
+      @deleted = false
     end  
     
     def delete?
-      @y < 0 or @y > @parent.h or 
+      @deleted or
+      @y < 0 or @y > @parent.h or
       @x < 0 or @x > @parent.w        
     end
     
     def draw
-      @surface.blit(@parent, [ @x, @y ])      
+      @image.blit(@parent, [ @x, @y ])
+      update
     end
-    
+
+    def update
+      @rect.center = [@x, @y]
+      Game.runner.objects.each do |obj|
+        next unless obj.is_a? Destroyable
+        
+        if obj.collide_sprite?(self)
+          obj.hit
+          @deleted = true
+        end
+      end
+    end
+
     def move(pos)
       case vector
       when :up
