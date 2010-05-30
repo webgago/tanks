@@ -22,6 +22,7 @@ include Rubygame::EventActions
 include Rubygame::EventTriggers
 include EventHandler::HasEventHandler
     
+require "lib/bomb"
 require "lib/tank"
 require "lib/wall"
 require "lib/beton"

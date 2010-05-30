@@ -24,7 +24,7 @@ class Wall
   end
 
   def hit
-    @hp = @hp - (HP * 0.25) rescue @hp = HP - (HP * 0.25)
+    @hp = @hp - (HP * 1) rescue @hp = HP - (HP * 1)
   end
 
   def delete?

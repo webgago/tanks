@@ -9,6 +9,7 @@ module Game
     
     attr_accessor :objects
     attr_accessor :screen
+    attr_accessor :background
     attr_accessor :clock
     
     def initialize(width, height, options)
@@ -67,6 +68,12 @@ module Game
     def make_screen(width, height, options)
       @screen = Screen.open( [width, height], 0, options )
       @screen.title = "The Tanks!"
+
+      # Create The Background
+      @background = Surface.new(@screen.size)
+      @background.fill([0,0,0])
+      @background.blit(@screen, [0,0])
+      @screen.update
     end
 
     # Quit the game
@@ -76,8 +83,8 @@ module Game
 
     # Do everything needed for one frame.
     def step
-      # Clear the screen.
-      @screen.fill( :black )
+
+      @background.fill([0,0,0])
 
       # Fetch input events, etc. from SDL, and add them to the queue.
       @queue.fetch_sdl_events
@@ -90,16 +97,18 @@ module Game
         handle( event )
       end
 
+      @background.blit(@screen, [0, 0])
+
       # Draw the ship in its new position.
       @objects.each do |object|
-        object.draw( @screen )
         object.update
+        object.draw( @screen )
         @objects.delete(object) if object.delete? rescue ''
       end 
 
       # Refresh the screen.
-      @screen.update()
-      @screen.flip()
+      @screen.update
+      @screen.flip
     end
   end
 end

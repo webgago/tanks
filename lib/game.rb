@@ -42,7 +42,7 @@ module Game
     
     def run( width, height, &block )
       @@runner = self::Runner.new( width, height, @@options)
-      yield runner.screen, runner.objects, runner 
+      yield runner.screen, runner.background, runner.objects, runner
       @@runner.go
     end
 

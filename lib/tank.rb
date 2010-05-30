@@ -21,9 +21,10 @@ class Tank
 
   HP = 200
 
-  def initialize( screen, px, py )
+  def initialize( screen, background, px, py )
 
     @screen = screen
+    @background = background
     @px, @py = px, py # Current Position
       
     # The ship's appearance. A white square for demonstration.
@@ -120,7 +121,7 @@ class Tank
     @rect = image.make_rect()
 		@rect.center = center # re-center
     
-    shooting_set_position(@rect.center)
+    shooting_set_position(@rect.center.map{|a| a-3 })
   end
     
   private
