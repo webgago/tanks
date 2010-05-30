@@ -3,6 +3,27 @@ module Game
   
   class << self
 
+    @@options = []
+
+    def asyncblit!
+      @@options << Rubygame::ASYNCBLIT unless @@options.include?(Rubygame::ASYNCBLIT)
+      self
+    end
+
+    def hwsurface!
+      @@options << Rubygame::HWSURFACE unless @@options.include?(Rubygame::HWSURFACE)
+      self
+    end
+
+    def doublebuf!
+      @@options << Rubygame::DOUBLEBUF unless @@options.include?(Rubygame::DOUBLEBUF)
+      self
+    end
+
+    def fullscreen!
+      @@options << Rubygame::FULLSCREEN unless @@options.include?(Rubygame::FULLSCREEN)
+      self
+    end
 
     # Get the absolute path to the directory that this script is in.
     def dir
@@ -19,16 +40,36 @@ module Game
       Font.autoload_dirs    << File.join(dir, resources_dir, "fonts")
     end
     
-    def run( &block )
-      @@runner = self::Runner.new
-      yield @@runner
+    def run( width, height, &block )
+      @@runner = self::Runner.new( width, height, @@options)
+      yield runner.screen, runner.objects, runner 
       @@runner.go
     end
 
     def runner
       @@runner
     end
-    
+
+    def map( name, step, &block )
+
+      map = File.join(Game.dir, "resources", name)
+
+      File.open(map) do |f|
+        f.each_line do |line|
+          x = 0
+          line.each_char do |object|
+            y = f.lineno
+
+            left = x * step
+            top = y * step
+
+            yield top, left, object 
+
+            x += 1
+          end
+        end
+      end
+    end
   end
   
 end

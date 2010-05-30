@@ -1,3 +1,11 @@
+module Destroyable
+end
+
+module Obstruction
+end
+
+Infinity = 1.0/0
+
 require "rubygems"
 require "rubygame"
 
@@ -16,5 +24,6 @@ include EventHandler::HasEventHandler
     
 require "lib/tank"
 require "lib/wall"
+require "lib/beton"
 require "lib/game/runner"
 

@@ -1,10 +1,3 @@
-
-module Destroyable
-end
-
-module Obstruction
-end
-
 class Wall
   include Sprites::Sprite
   include EventHandler::HasEventHandler
@@ -13,13 +6,12 @@ class Wall
 
   HP = 200
 
-  def initialize( screen, top, left, w, h )
+  def initialize( screen, top, left )
     @screen = screen
     #@px, @py = px, py # Current Position
 
     # The ship's appearance. A white square for demonstration.
-    @image = @tank = Surface.new([w, h])
-    @image.fill([255,155,0])
+    @image = Surface['wall.png']
 
     @rect = @image.make_rect
     @rect.top = top
@@ -33,7 +25,6 @@ class Wall
 
   def hit
     @hp = @hp - (HP * 0.25) rescue @hp = HP - (HP * 0.25)
-    puts "#{@hp}/#{HP}"
   end
 
   def delete?

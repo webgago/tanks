@@ -11,9 +11,11 @@ module Game
     attr_accessor :screen
     attr_accessor :clock
     
-    def initialize
+    def initialize(width, height, options)
+      Rubygame.init
       @objects = []
-      make_screen
+
+      make_screen(width, height, options)
       make_clock
       make_queue
       make_event_hooks      
@@ -23,9 +25,7 @@ module Game
     # over and over and over until the user quits.
     def go
       catch(:quit) do
-        loop do
-          step
-        end
+        loop { step }
       end
     end
 
@@ -64,15 +64,13 @@ module Game
     end
 
     # Create the Rubygame window.
-    def make_screen
-      #Rubygame::FULLSCREEN
-      @screen = Screen.open( [600, 600], 0, [Rubygame::ASYNCBLIT, Rubygame::HWSURFACE, Rubygame::DOUBLEBUF] )
+    def make_screen(width, height, options)
+      @screen = Screen.open( [width, height], 0, options )
       @screen.title = "The Tanks!"
     end
 
     # Quit the game
     def quit
-      puts "Quitting!"
       throw :quit
     end
 

@@ -135,14 +135,11 @@ module LineMoving
   # Update the position based on the velocity and the time since last
   # update.
   def update_pos( dt )
+    old_x = @px
+    old_y = @py
+
     px = @px + (@vx * dt)
     py = @py + (@vy * dt)
-
-    obstructions = Game.runner.objects.select do |obj|
-      obj.is_a?(Obstruction) and obj.collide_sprite?(self)
-    end
-
-    return unless obstructions.empty?
 
     if py - (@rect.h/2) > 0 and 
         py < @screen.h - (@rect.h/2) and
@@ -152,9 +149,19 @@ module LineMoving
       
       @px += @vx * dt
       @py += @vy * dt
-      
+
       @rect.center = [@px, @py]
     end
+
+    obstructions = Game.runner.objects.select do |obj|
+      obj.is_a?(Obstruction) && obj.rect.inflate(-1,-1).collide_rect?(@rect)
+    end
+
+    unless obstructions.empty?
+      @px, @py = old_x, old_y
+      @rect.center = [@px, @py]
+    end
+
   end
   public :update_pos
     
