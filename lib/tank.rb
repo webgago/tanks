@@ -45,12 +45,11 @@ class Tank
   end
 
   def hit
-    @hp = @hp - (HP * 0.25) rescue @hp = HP - (HP * 0.25)
-    puts "#{@hp}/#{HP}"
+    100
   end
 
   def delete?
-    @hp == 0 or @hp < 0
+    false
   end
   
   def hooks!

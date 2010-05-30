@@ -99,11 +99,15 @@ module Game
 
       @background.blit(@screen, [0, 0])
 
-      # Draw the ship in its new position.
       @objects.each do |object|
         object.update
-        object.draw( @screen )
-        @objects.delete(object) if object.delete? rescue ''
+
+        if object.delete?
+          object.undraw(@screen, @background)
+          @objects.delete(object)
+        else
+          object.draw( @screen )
+        end
       end 
 
       # Refresh the screen.
