@@ -69,11 +69,18 @@ module LineMoving
   # Add it to the list of keys being pressed.
   def start_moving( event )  
     @key = event.key if moving_key?(event.key)
+    Sound['stay.ogg'].stop
+
+    Sound['ride.ogg'].volume = 0.3
+    Sound['ride.ogg'].play
   end
   
   # Remove it from the list of keys being pressed.
   def end_moving( event )
     @key = :none if moving_key?(event.key) and event.key == @key
+    Sound['ride.ogg'].stop
+    Sound['stay.ogg'].volume = 0.3
+    Sound['stay.ogg'].play :repeats => -1
   end
   
   # Update the acceleration based on what keys are pressed.

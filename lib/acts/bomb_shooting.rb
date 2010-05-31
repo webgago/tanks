@@ -60,9 +60,8 @@ module BombShooting
   end
   
   def play_sound
-    rand_num = [1,2,3,4].shuffle.first
-    name = "MoteAbsorb#{rand_num}.ogg"
-    Sound[name].play rescue puts "Ooops! File #{name} does not exists!"
+    Sound["shoot.ogg"].volume = 0.3
+    Sound["shoot.ogg"].play
   end
   
 end

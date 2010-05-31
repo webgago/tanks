@@ -52,6 +52,8 @@ class Bomb
       if obj.collide_sprite?(self)
         obj.hit
         @deleted = true
+        Sound['boom.ogg'].volume = 0.3
+        Sound['boom.ogg'].play
       end
     end
   end

@@ -4,7 +4,7 @@ begin
 
   Game.autoload_resources!("resources")
 
-  Game.asyncblit!.hwsurface!.doublebuf!#.fullscreen!
+  Game.asyncblit!.hwsurface!.doublebuf!.fullscreen!
 
   Game.run 400, 400 do |screen, background, objects, runner|
 
@@ -33,6 +33,7 @@ begin
       end
     end
 
+    Sound['start.ogg'].play
   end
 
 ensure
