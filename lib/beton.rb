@@ -1,16 +1,15 @@
-class Beton < Wall
+module Tanks
 
-  HP = Infinity
+  class Beton < Wall
 
-  def initialize( screen, top, left)
-    @screen = screen
+    HP = Infinity
 
-    @image = Surface['beton.png']
+    def initialize( screen, top, left)
+      super( screen, top, left )
+      @hp = Infinity
+    end
 
-    @rect = @image.make_rect
-    @rect.top = top
-    @rect.left = left
-    @hp = Infinity
+
   end
   
 end

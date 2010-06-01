@@ -1,35 +1,28 @@
-class Wall
-  include Sprites::Sprite
-  include EventHandler::HasEventHandler
-  include Destroyable
-  include Obstruction
+module Tanks
+  
+  class Wall < GObject
+    include Destroyable
+    include Obstruction
 
-  HP = 200
+    HP = 200
 
-  def initialize( screen, top, left )
-    @screen = screen
-    #@px, @py = px, py # Current Position
+    def initialize( parent, top, left )
+      super(parent, :left => left, :top => top)
+      @hp = 200
+    end
 
-    # The ship's appearance. A white square for demonstration.
-    @image = Surface['wall.png']
-
-    @rect = @image.make_rect
-    @rect.top = top
-    @rect.left = left
-    @hp = 200
-  end
-
-  def update
+    def update
     
-  end
+    end
 
-  def hit
-    @hp = @hp - (HP * 1) rescue @hp = HP - (HP * 1)
-  end
+    def hit
+      @hp = @hp - (HP * 1) rescue @hp = HP - (HP * 1)
+    end
 
-  def delete?
-    @hp == 0 or @hp < 0
-  end
+    def delete?
+      @hp == 0 or @hp < 0
+    end
 
   
+  end
 end

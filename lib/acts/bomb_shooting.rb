@@ -32,7 +32,7 @@ module BombShooting
   end
   
   def shoot
-    @bombs << Bomb.new(@background, @position, @vector )
+    @bombs << Tanks::Bomb.new(parent, @position, @vector )
     play_sound
   end
   
@@ -52,7 +52,6 @@ module BombShooting
            
       if bomb.delete?
         @bombs.delete(bomb)
-        bomb.undraw(@screen, @background)
       else
         bomb.draw
       end        

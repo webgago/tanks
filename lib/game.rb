@@ -1,5 +1,5 @@
 
-module Game 
+module Tanks
   
   class << self
 
@@ -42,7 +42,7 @@ module Game
     
     def run( width, height, &block )
       @@runner = self::Runner.new( width, height, @@options)
-      yield runner.screen, runner.background, runner.objects, runner
+      yield runner.background, runner.objects, runner
       @@runner.go
     end
 
@@ -52,7 +52,7 @@ module Game
 
     def map( name, step, &block )
 
-      map = File.join(Game.dir, "resources", name)
+      map = File.join(Tanks.dir, "resources", name)
 
       File.open(map) do |f|
         f.each_line do |line|

@@ -148,25 +148,25 @@ module LineMoving
     px = @px + (@vx * dt)
     py = @py + (@vy * dt)
 
-    if py - (@rect.h/2) > 0 and 
-        py < @screen.h - (@rect.h/2) and
-        px - (@rect.w/2) > 0 and
-        px < @screen.w - (@rect.w/2)
+    if py - (rect.h/2) > 0 and
+        py < parent.h - (rect.h/2) and
+        px - (rect.w/2) > 0 and
+        px < parent.w - (rect.w/2)
       then
       
       @px += @vx * dt
       @py += @vy * dt
 
-      @rect.center = [@px, @py]
+      rect.center = [@px, @py]
     end
 
-    obstructions = Game.runner.objects.select do |obj|
-      obj.is_a?(Obstruction) && obj.rect.inflate(-1,-1).collide_rect?(@rect)
+    obstructions = Tanks.runner.objects.select do |obj|
+      obj.is_a?(Obstruction) && obj.rect.inflate(-1,-1).collide_rect?(rect)
     end
 
     unless obstructions.empty?
       @px, @py = old_x, old_y
-      @rect.center = [@px, @py]
+      rect.center = [@px, @py]
     end
 
   end

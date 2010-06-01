@@ -1,4 +1,4 @@
-module Game
+module Tanks
 
 
   class Runner

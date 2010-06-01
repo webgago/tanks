@@ -9,7 +9,7 @@ include Rubygame::Events
 include Rubygame::EventActions
 include Rubygame::EventTriggers
 
-class Game
+class Tanks
   include EventHandler::HasEventHandler
   
   def initialize
@@ -114,7 +114,7 @@ class Game
   end
 end
 
-game = Game.new
+game = Tanks.new
 game.run
 
 
